@@ -1,2 +1,2 @@
 # SuperbVote
-Fork with fixed uuid's
+Fork of https://github.com/astei/SuperbVote with fixed uuid's
