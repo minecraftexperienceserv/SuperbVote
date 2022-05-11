@@ -75,7 +75,6 @@ public class SuperbVote extends JavaPlugin {
         }
 
         getCommand("superbvote").setExecutor(new SuperbVoteCommand());
-        getCommand("vote").setExecutor(configuration.getVoteCommand());
         getCommand("votestreak").setExecutor(configuration.getVoteStreakCommand());
 
         getServer().getPluginManager().registerEvents(new SuperbVoteListener(), this);
@@ -124,7 +123,6 @@ public class SuperbVote extends JavaPlugin {
         scoreboardHandler.reload();
         voteServiceCooldown = new VoteServiceCooldown(getConfig().getInt("votes.cooldown-per-service", 3600));
         getServer().getScheduler().runTaskAsynchronously(this, getScoreboardHandler()::doPopulate);
-        getCommand("vote").setExecutor(configuration.getVoteCommand());
         getCommand("votestreak").setExecutor(configuration.getVoteStreakCommand());
 
         if (voteReminderTask != null) {
