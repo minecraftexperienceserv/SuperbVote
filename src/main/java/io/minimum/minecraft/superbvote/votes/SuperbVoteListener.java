@@ -104,8 +104,8 @@ public class SuperbVoteListener implements Listener {
             SuperbVote.getPlugin().getQueuedVotes().addVote(vote);
         } else {
             if (!vote.isFakeVote() || SuperbVote.getPlugin().getConfig().getBoolean("votes.process-fake-votes")) {
-                SuperbVote.getPlugin().getVoteStorage().addVote(vote);
-            }
+                    SuperbVote.getPlugin().getVoteStorage().addVote(vote);
+                }
 
             if (!wasQueued) {
                 for (VoteReward reward : bestRewards) {
@@ -114,7 +114,9 @@ public class SuperbVoteListener implements Listener {
                 Bukkit.getScheduler().runTaskAsynchronously(SuperbVote.getPlugin(), this::afterVoteProcessing);
             }
 
-            Bukkit.getScheduler().runTask(SuperbVote.getPlugin(), () -> bestRewards.forEach(reward -> reward.runCommands(vote)));
+            Bukkit.getScheduler().runTaskLaterAsynchronously(SuperbVote.getPlugin(), () -> {
+                Bukkit.getScheduler().runTask(SuperbVote.getPlugin(), () -> bestRewards.forEach(reward -> reward.runCommands(vote)));
+            } , 20);
         }
     }
 
